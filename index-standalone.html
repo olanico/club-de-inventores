@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Club de los Inventores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A90D9;
+            --primary-dark: #2E6BB0;
+            --secondary: #6B8E23;
+            --accent: #F5A623;
+            --background: #FFF9F0;
+            --text: #2D3436;
+            --text-light: #636E72;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .welcome-screen h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-screen p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-group label .emoji {
+            margin-right: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-family: inherit;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            background: var(--card-bg);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: inherit;
+            background: linear-gradient(135deg, var(--accent) 0%, #E09612 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 166, 35, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(74, 144, 217, 0.5);
+        }
+
+        /* Story Screen */
+        .story-screen {
+            display: none;
+        }
+
+        .chapter-illustration {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .chapter-title {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-dark);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .chapter-content {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1rem;
+        }
+
+        .chapter-content em {
+            color: var(--primary-dark);
+        }
+
+        .chapter-content blockquote {
+            background: linear-gradient(135deg, #F0F8FF 0%, #E8F4FD 100%);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .info-box.sabias-que {
+            border-left: 4px solid var(--secondary);
+        }
+
+        .info-box.actividad {
+            border-left: 4px solid var(--accent);
+        }
+
+        .info-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-box.sabias-que h3 { color: var(--secondary); }
+        .info-box.actividad h3 { color: #D4850F; }
+
+        /* Decisions */
+        .decision-box {
+            background: linear-gradient(135deg, #FFF5E6 0%, #FFECD2 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .decision-box h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .decision-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            margin: 0.75rem 0;
+            font-family: inherit;
+            font-size: 1rem;
+            text-align: left;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .decision-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .decision-btn .option {
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .decision-btn:hover .option {
+            color: white;
+        }
+
+        .decision-btn .description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .decision-btn:hover .description {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Quote */
+        .chapter-quote {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-style: italic;
+            color: var(--text-light);
+            border-top: 1px solid #E0E0E0;
+        }
+
+        /* Progress */
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 0.75rem 1rem;
+            box-shadow: 0 -2px 10px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .progress-info {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 6px;
+            background: #E0E0E0;
+            border-radius: 3px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .menu-btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-family: inherit;
+            background: transparent;
+            border: 1px solid var(--text-light);
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .menu-btn:hover {
+            background: var(--text-light);
+            color: white;
+        }
+
+        /* Achievements (Final) */
+        .achievements {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .achievement {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .achievement .badge {
+            font-size: 2rem;
+        }
+
+        .achievement .text {
+            font-weight: 600;
+        }
+
+        /* Ending */
+        .ending {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .ending h2 {
+            color: var(--secondary);
+            font-family: 'Merriweather', serif;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 1.5rem;
+            }
+
+            .chapter-content {
+                font-size: 1rem;
+            }
+
+            .welcome-screen h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Menu modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+        }
+
+        .modal-btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        .modal-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .modal-btn.danger {
+            border-color: #E74C3C;
+            color: #E74C3C;
+        }
+
+        .modal-btn.danger:hover {
+            background: #E74C3C;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>📚 El Club de los Inventores</h1>
+        <div class="subtitle">Una historia interactiva para pequeños curiosos</div>
+    </header>
+
+    <main class="container">
+        <!-- WELCOME SCREEN -->
+        <section id="welcome-screen" class="welcome-screen">
+            <h2>¡Bienvenido/a, futuro/a inventor/a!</h2>
+            <p>Antes de comenzar tu aventura, contanos un poco sobre vos:</p>
+
+            <form id="personalization-form">
+                <div class="form-group">
+                    <label><span class="emoji">👤</span>¿Cuál es tu nombre?</label>
+                    <input type="text" id="input-nombre" required placeholder="Tu nombre">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="emoji">👫</span>¿Cómo se llama tu mejor amigo/a?</label>
+                    <input type="text" id="input-amigo" required placeholder="Nombre de tu amigo/a">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="emoji">🏙️</span>¿En qué ciudad vivís?</label>
+                    <input type="text" id="input-ciudad" required placeholder="Tu ciudad">
+                </div>
+
+                <div class="form-group">
+                    <label><span class="emoji">🔬</span>¿Quién es tu inventor/a favorito/a?</label>
+                    <select id="input-inventor" required>
+                        <option value="">Elegí uno...</option>
+                        <option value="Thomas Edison">Thomas Edison (Bombilla eléctrica)</option>
+                        <option value="Marie Curie">Marie Curie (Radioactividad)</option>
+                        <option value="Leonardo da Vinci">Leonardo da Vinci (Mil inventos)</option>
+                        <option value="Nikola Tesla">Nikola Tesla (Electricidad)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">🚀 ¡Comenzar la aventura!</button>
+            </form>
+        </section>
+
+        <!-- STORY SCREEN -->
+        <section id="story-screen" class="story-screen">
+            <img id="chapter-image" class="chapter-illustration" src="" alt="">
+            <h2 id="chapter-title" class="chapter-title"></h2>
+            <div id="chapter-content" class="chapter-content"></div>
+            <div id="chapter-extras"></div>
+            <div id="chapter-decisions" class="decision-box hidden">
+                <h3>⚡ ¿Qué hacemos?</h3>
+                <div id="decisions-container"></div>
+            </div>
+            <div id="chapter-quote" class="chapter-quote"></div>
+        </section>
+    </main>
+
+    <!-- PROGRESS BAR -->
+    <div id="progress-bar" class="progress-bar hidden">
+        <span class="progress-info" id="progress-text">Capítulo 1</span>
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width: 10%"></div>
+        </div>
+        <button class="menu-btn" id="menu-btn">☰ Menú</button>
+    </div>
+
+    <!-- MENU MODAL -->
+    <div id="menu-modal" class="modal-overlay">
+        <div class="modal">
+            <h3>📖 Menú</h3>
+            <button class="modal-btn" id="continue-btn">▶️ Continuar leyendo</button>
+            <button class="modal-btn" id="restart-chapter-btn">🔄 Reiniciar capítulo</button>
+            <button class="modal-btn danger" id="restart-all-btn">🗑️ Nueva partida</button>
+        </div>
+    </div>
+
+    <script>
+    // ========================================
+    // STORY DATA
+    // ========================================
+    const chapters = {
+        "01": {
+            title: "Capítulo 1: El Descubrimiento",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNkI4RTIzO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0YTYzMTg7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDE6IEVsIERlc2N1YnJpbWllbnRvPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjYiPvCfjqggSWx1c3RyYWNpw7NuIHBlbmRpZW50ZTwvdGV4dD4KICA8cmVjdCB4PSI1MCIgeT0iMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KPC9zdmc+",
+            content: `
+                <p>Todo comenzó un sábado lluvioso en {CIUDAD}.</p>
+                <p>{NOMBRE} estaba en su cuarto, aburrido, mirando por la ventana las gotas de lluvia que resbalaban por el vidrio. En la pared, un póster de {INVENTOR_FAVORITO} parecía observarlo con una sonrisa, como diciéndole: <em>"Los días aburridos son perfectos para descubrir algo nuevo."</em></p>
+                <p>—¡{NOMBRE}! —gritó {AMIGO} desde la puerta—. ¡Tenés que ver esto!</p>
+                <p>{AMIGO} estaba empapado de pies a cabeza, pero tenía los ojos brillantes de emoción. En la mano llevaba un cuaderno viejo, con las páginas amarillentas y una tapa de cuero gastado.</p>
+                <p>—Lo encontré en el contenedor de reciclaje de la calle Mendoza —explicó {AMIGO}, tratando de recuperar el aliento—. ¡Mirá lo que tiene adentro!</p>
+                <p>{NOMBRE} tomó el cuaderno con cuidado. Las páginas estaban llenas de dibujos extraños: engranajes, poleas, circuitos... y algo que parecía un mapa.</p>
+                <p>—Son planos de inventos —susurró {NOMBRE}, pasando las páginas con asombro—. ¡Y este mapa... creo que es de nuestro barrio!</p>
+                <p>Había una X marcada en el mapa, junto a una nota escrita con letra antigua:</p>
+                <blockquote>"Para quien tenga la curiosidad de buscar y el ingenio de encontrar."</blockquote>
+                <p>Los dos amigos se miraron. Afuera, la lluvia comenzaba a parar.</p>
+                <p>—El mapa señala dos lugares —dijo {AMIGO}, estudiando el dibujo—. Uno parece ser... ¿el sótano de la casa abandonada de la esquina?</p>
+                <p>—Y el otro parece estar en el jardín trasero del viejo molino —completó {NOMBRE}.</p>
+                <p>En ese momento, como si el universo quisiera darles una pista, escucharon algo. Un ruido bajo y metálico que parecía venir de lejos... y una luz extraña que parpadeó brevemente a través de la ventana.</p>
+                <p>—¿Escuchaste eso? —preguntó {AMIGO}.</p>
+                <p>—¿Viste eso? —preguntó {NOMBRE} al mismo tiempo.</p>
+            `,
+            sabiasQue: `
+                <p><strong>Marie Curie</strong> descubrió la radioactividad mientras investigaba por qué ciertos minerales brillaban en la oscuridad. ¡Todo gran descubrimiento empieza con una simple curiosidad!</p>
+                <p><strong>Thomas Edison</strong> tenía un cuaderno donde anotaba todas sus ideas, igual que el cuaderno que encontraron {NOMBRE} y {AMIGO}. Llegó a llenar más de 3,500 cuadernos durante su vida.</p>
+            `,
+            actividad: `
+                <p>¿Tenés un cuaderno de ideas? Si no, ¡podés empezar uno! Anotá todas las preguntas que te hacés durante el día:</p>
+                <ul>
+                    <li>¿Por qué el cielo es azul?</li>
+                    <li>¿Cómo funciona el WiFi?</li>
+                    <li>¿Por qué los aviones no se caen?</li>
+                </ul>
+                <p>Las mejores invenciones nacen de preguntas simples.</p>
+            `,
+            decisions: [
+                { text: "El ruido extraño que viene del sótano de la casa abandonada", subtext: "Va al Capítulo 2A: El Sótano Misterioso", next: "02A" },
+                { text: "La luz parpadeante que viene del jardín del viejo molino", subtext: "Va al Capítulo 2B: Luces en la Noche", next: "02B" }
+            ],
+            quote: "\"La curiosidad es la mecha que enciende el fuego del descubrimiento.\" — Anónimo"
+        },
+        "02A": {
+            title: "Capítulo 2A: El Sótano Misterioso",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOEI0NTEzO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2MTMwMGQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDJBOiBFbCBTw7N0YW5vIE1pc3Rlcmlvc288L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSIyNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNiI+8J+OqCBJbHVzdHJhY2nDs24gcGVuZGllbnRlPC90ZXh0PgogIDxyZWN0IHg9IjUwIiB5PSIzODAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgo8L3N2Zz4=",
+            content: `
+                <p>{NOMBRE} y {AMIGO} corrieron bajo los últimos goterones de lluvia hasta llegar a la casa abandonada de la esquina.</p>
+                <p>La casa había estado vacía desde que {NOMBRE} tenía memoria. Los vecinos decían que antes había vivido ahí un señor muy extraño que nunca salía de día y que siempre se escuchaban ruidos raros por las noches. Pero eso había sido hace muchos años.</p>
+                <p>—La gente dice que está embrujada —susurró {AMIGO}—, pero yo no creo en fantasmas.</p>
+                <p>—Yo tampoco —dijo {NOMBRE}, aunque sintió un escalofrío—. Los ruidos siempre tienen una explicación científica. Solo hay que encontrarla.</p>
+                <p>Se acercaron a la puerta del sótano, que estaba al costado de la casa, medio escondida entre arbustos crecidos. El ruido metálico se escuchaba más fuerte ahora: <em>CLANG... CLANG... CLANG...</em> Un ritmo regular, como el latido de un corazón mecánico.</p>
+                <p>—Escuchá —dijo {NOMBRE}, arrodillándose junto a la puerta—. El sonido viene de abajo. Y es rítmico. Eso significa que hay algún mecanismo funcionando ahí adentro.</p>
+                <p>—¿Un mecanismo? ¿Después de tantos años? —{AMIGO} frunció el ceño—. ¿De dónde sacaría energía?</p>
+                <p>Esa era una excelente pregunta. {NOMBRE} recordó lo que había leído sobre {INVENTOR_FAVORITO}: siempre empezaba preguntándose "¿de dónde viene la energía?"</p>
+                <p>La puerta del sótano era de metal pesado, con un candado oxidado. Estaba cerrada.</p>
+                <p>—Necesitamos entrar —dijo {NOMBRE}—. Pero hay un problema...</p>
+                <p>Miraron alrededor. Además de la puerta principal, había una pequeña ventana lateral, casi al nivel del suelo, que daba al sótano. Estaba sucia pero parecía más accesible.</p>
+            `,
+            sabiasQue: `
+                <p><strong>Los candados</strong> fueron inventados hace más de 4,000 años en la antigua Mesopotamia. ¡Pero el primer candado con combinación fue diseñado en Roma!</p>
+                <p><strong>La energía</strong> nunca desaparece, solo se transforma. Esto se llama la "Ley de Conservación de la Energía". Si hay una máquina funcionando después de años, tiene que estar obteniendo energía de algún lado: ¿solar? ¿eólica? ¿algo más ingenioso?</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: El candado humano</strong></p>
+                <p>Intentá crear un "candado" usando solo materiales de tu casa: palitos de helado, clips, banditas elásticas.</p>
+                <p>El desafío: que solo se abra si sabés el truco específico. ¡Así es como piensan los inventores de cerraduras!</p>
+            `,
+            decisions: [
+                { text: "Buscar la llave por los alrededores", subtext: "\"Si alguien escondió algo tan importante acá, probablemente dejó una forma de volver a entrar.\"", next: "03A" },
+                { text: "Intentar entrar por la ventana lateral", subtext: "\"El camino más difícil a veces es el más directo. Además, ¡ya puedo ver la máquina!\"", next: "03B" }
+            ],
+            quote: "\"Cuando encuentres una puerta cerrada, preguntate: ¿quién la cerró, y por qué?\" — Principio de todo buen investigador"
+        },
+        "02B": {
+            title: "Capítulo 2B: Luces en la Noche",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNDgzRDhCO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMzMjJhNjE7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDJCOiBMdWNlcyBlbiBsYSBOb2NoZTwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjI2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC42Ij7wn46oIElsdXN0cmFjacOzbiBwZW5kaWVudGU8L3RleHQ+CiAgPHJlY3QgeD0iNTAiIHk9IjM4MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIi8+Cjwvc3ZnPg==",
+            content: `
+                <p>{NOMBRE} y {AMIGO} decidieron seguir la luz misteriosa.</p>
+                <p>El viejo molino estaba a unas cuadras de distancia, al final de una calle sin salida que terminaba en un terreno baldío. Nadie lo usaba desde hacía décadas, pero sus aspas de madera todavía giraban cuando había viento fuerte.</p>
+                <p>—Ahí está otra vez —señaló {AMIGO}.</p>
+                <p>Una luz verdosa parpadeó tres veces desde algún lugar cerca del molino. Luego se apagó. Luego volvió a parpadear: esta vez cinco veces.</p>
+                <p>—Tres... cinco... —murmuró {NOMBRE}, contando—. ¿Por qué números diferentes?</p>
+                <p>Llegaron al terreno baldío cuando el sol comenzaba a ponerse detrás de las nubes. El molino se alzaba frente a ellos, viejo pero imponente. La luz volvió a aparecer, esta vez desde una ventana del segundo piso.</p>
+                <p>—¡Es un patrón! —exclamó {NOMBRE} de repente—. Mirá: tres parpadeos, pausa, cinco parpadeos, pausa larga. ¿No te parece conocido?</p>
+                <p>{AMIGO} lo pensó un momento.</p>
+                <p>—¿Código Morse? No, eso usa puntos y rayas... ¿Binario?</p>
+                <p>—¡Números primos! —dijo {NOMBRE}, emocionado—. Tres y cinco son números primos. Es una secuencia matemática. ¡Alguien está enviando un mensaje!</p>
+            `,
+            sabiasQue: `
+                <p><strong>Los números primos</strong> (2, 3, 5, 7, 11, 13...) son tan especiales que los científicos los usan para intentar comunicarse con extraterrestres. ¿Por qué? Porque son universales: cualquier civilización inteligente reconocería un patrón de números primos.</p>
+                <p><strong>Nikola Tesla</strong> creía que había recibido señales del espacio exterior mientras hacía experimentos con ondas de radio. ¡Su curiosidad lo llevó a inventar muchas cosas increíbles!</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Tu propio código de luces</strong></p>
+                <p>Necesitás: una linterna (o la luz del celular) y un amigo o familiar.</p>
+                <p>Creá tu propio código secreto: 1 parpadeo = A, 2 parpadeos = B, 3 parpadeos = C...</p>
+                <p>¡Intentá enviar un mensaje y que la otra persona lo descifre!</p>
+            `,
+            decisions: [
+                { text: "Construir un detector de señales", subtext: "\"Si construimos algo que capture la luz, podemos analizar exactamente qué frecuencia tiene.\"", next: "03C" },
+                { text: "Observar y documentar el patrón", subtext: "\"Un buen científico primero observa. Si anotamos cada parpadeo, quizás encontremos el mensaje escondido.\"", next: "03D" }
+            ],
+            quote: "\"La naturaleza habla en el idioma de las matemáticas. Solo tenemos que aprender a escucharla.\" — Galileo Galilei"
+        },
+        "03A": {
+            title: "Capítulo 3A: La Búsqueda",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojQ0Q4NTNGO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4ZjVkMmM7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDNBOiBMYSBCw7pzcXVlZGE8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSIyNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNiI+8J+OqCBJbHVzdHJhY2nDs24gcGVuZGllbnRlPC90ZXh0PgogIDxyZWN0IHg9IjUwIiB5PSIzODAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgo8L3N2Zz4=",
+            content: `
+                <p>—La llave tiene que estar por acá —dijo {NOMBRE}, mirando alrededor de la casa abandonada—. Nadie cierra algo con candado sin guardar una copia de la llave.</p>
+                <p>{AMIGO} asintió.</p>
+                <p>—Mi abuela siempre dice que las personas esconden las llaves en lugares "seguros" que en realidad son muy predecibles: debajo del tapete, dentro de una maceta, arriba del marco de la puerta...</p>
+                <p>Buscaron en todos esos lugares, pero nada. La llave no aparecía.</p>
+                <p>—Pensemos diferente —dijo {NOMBRE}—. Si el dueño de esta casa era inventor, ¿escondería la llave de manera obvia?</p>
+                <p>—¡No! —los ojos de {AMIGO} se iluminaron—. La escondería de manera ingeniosa. Algo que solo otro inventor entendería.</p>
+                <p>Volvieron a examinar el cuaderno que habían encontrado. En una de las páginas había un dibujo de la fachada de una casa, con una flecha que señalaba algo en el techo.</p>
+                <p>—¿Eso es... una veleta? —preguntó {NOMBRE}.</p>
+                <p>En ese momento, recordaron que Don Carlos, el vecino del frente, tenía fama de coleccionar cosas viejas. Pero también el abuelo de Martina tenía ese taller lleno de herramientas...</p>
+            `,
+            sabiasQue: `
+                <p><strong>Las veletas</strong> son uno de los instrumentos meteorológicos más antiguos. ¡Los griegos usaban veletas hace más de 2,000 años! Pero también se usaban como símbolos secretos.</p>
+                <p><strong>Leonardo da Vinci</strong> dejaba sus notas escritas al revés (en espejo) para que solo pudieran leerlas quienes supieran el truco.</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Esconde tu propia llave</strong></p>
+                <p>Pensá en un lugar ingenioso para esconder un objeto pequeño:</p>
+                <ul>
+                    <li>¿Puede estar dentro de otro objeto?</li>
+                    <li>¿Puede requerir resolver un acertijo para encontrarla?</li>
+                    <li>¿Puede estar a la vista pero disfrazada?</li>
+                </ul>
+            `,
+            decisions: [
+                { text: "Ir al taller del abuelo de Martina", subtext: "\"Él es mecánico y tiene todo tipo de cosas viejas. Quizás la llave estuvo ahí todo este tiempo.\"", next: "04A" },
+                { text: "Preguntarle a Don Carlos, el vecino coleccionista", subtext: "\"Él vive justo enfrente y colecciona cosas antiguas. Seguro sabe algo sobre el inventor original.\"", next: "04A" }
+            ],
+            quote: "\"Las respuestas más difíciles a veces las tienen las personas que llevan más tiempo haciendo las preguntas.\" — Proverbio inventor"
+        },
+        "03B": {
+            title: "Capítulo 3B: El Camino Difícil",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNzA4MDkwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0ZTU5NjQ7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDNCOiBFbCBDYW1pbm8gRGlmw61jaWw8L3RleHQ+CiAgPHRleHQgeD0iNDAwIiB5PSIyNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuNiI+8J+OqCBJbHVzdHJhY2nDs24gcGVuZGllbnRlPC90ZXh0PgogIDxyZWN0IHg9IjUwIiB5PSIzODAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4yKSIvPgo8L3N2Zz4=",
+            content: `
+                <p>—Por la ventana entonces —dijo {NOMBRE}, acercándose al pequeño vidrio que daba al sótano.</p>
+                <p>La ventana era más pequeña de lo que parecía desde lejos, y estaba trabada. Años de humedad habían hinchado la madera del marco, sellándola completamente.</p>
+                <p>—No se mueve —gruñó {AMIGO}, intentando empujarla—. Es como si estuviera pegada.</p>
+                <p>{NOMBRE} examinó el marco con atención. Pasó los dedos por los bordes, sintiendo la textura de la madera vieja.</p>
+                <p>—No está pegada —dijo después de un momento—. Está hinchada por la humedad. La madera absorbe agua y se expande. Es física básica.</p>
+                <p>—¿Y cómo la des-expandimos?</p>
+                <p>{NOMBRE} pensó. En su mente aparecieron las páginas de un libro que había leído sobre carpintería. También recordó algo que {INVENTOR_FAVORITO} había dicho una vez: <em>"Cuando la naturaleza crea un problema, la naturaleza tiene la solución."</em></p>
+                <p>—Necesitamos una herramienta —dijo finalmente—. Algo que nos deje aplicar fuerza de manera precisa sin romper el vidrio.</p>
+                <p>{AMIGO} vació la mochila en el pasto: un cuaderno, lápices, un paquete de chicles, una regla de metal, banditas elásticas, y un destornillador pequeño.</p>
+                <p>De pronto, escucharon una voz familiar. Era Martina, del curso, que pasaba en bicicleta.</p>
+            `,
+            sabiasQue: `
+                <p><strong>La madera</strong> absorbe y libera humedad constantemente. Por eso las puertas viejas se traban en verano (humedad alta) y se aflojan en invierno (humedad baja).</p>
+                <p><strong>MacGyver</strong> es un personaje de TV famoso por resolver problemas usando solo lo que tenía a mano. Pero en la vida real, los ingenieros de NASA hacen esto constantemente!</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Herramientas improvisadas</strong></p>
+                <p>Desafío: Abrí una caja de cartón cerrada con cinta SIN usar tijeras ni cuchillos.</p>
+                <p>Opciones a probar: una regla, la punta de un lápiz, tus propias uñas + paciencia.</p>
+                <p>¿Cuál funcionó mejor?</p>
+            `,
+            decisions: [
+                { text: "Construir una herramienta con los materiales de la mochila", subtext: "\"Puedo hacer una especie de palanca combinando la regla y el destornillador.\"", next: "05A" },
+                { text: "Pedirle ayuda a Martina (y contarle la verdad)", subtext: "\"Tres cabezas piensan mejor que dos. Además, Martina es buena resolviendo problemas.\"", next: "05A" }
+            ],
+            quote: "\"El ingenio no es tener las herramientas correctas; es hacer correctas las herramientas que tenés.\" — Proverbio maker"
+        },
+        "03C": {
+            title: "Capítulo 3C: El Primer Invento",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMjBCMkFBO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjdjNzY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDNDOiBFbCBQcmltZXIgSW52ZW50bzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjI2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC42Ij7wn46oIElsdXN0cmFjacOzbiBwZW5kaWVudGU8L3RleHQ+CiAgPHJlY3QgeD0iNTAiIHk9IjM4MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIi8+Cjwvc3ZnPg==",
+            content: `
+                <p>—Vamos a construir un detector —decidió {NOMBRE}, abriendo el cuaderno en la página de los diagramas.</p>
+                <p>El dibujo mostraba un aparato simple: una caja, un sensor de luz, y algo que parecía una pantalla o un indicador. Las notas al costado explicaban:</p>
+                <blockquote>"Detector fotónico básico. Captura longitud de onda y frecuencia. Materiales: cualquier cosa que reaccione a la luz."</blockquote>
+                <p>—¿Cualquier cosa que reaccione a la luz? —{AMIGO} levantó una ceja—. ¿Cómo qué?</p>
+                <p>—¿Y una calculadora solar? —sugirió {AMIGO}—. Mi hermanito tiene una. Funciona con luz.</p>
+                <p>—¡Sí! La celda solar de la calculadora genera electricidad cuando le da la luz. Si conectamos algo que mida esa electricidad...</p>
+                <p>Los dos amigos corrieron a la casa de {AMIGO} y volvieron con: una calculadora solar vieja, un par de auriculares rotos, cinta aisladora, y cables de un juguete roto.</p>
+                <p>Después de veinte minutos de trabajo (y varios intentos fallidos), el detector estaba listo. Era feo, lleno de cinta y cables, pero cuando {AMIGO} lo apuntó hacia una lámpara de la calle que empezaba a parpadear...</p>
+                <p><em>Clic. Clic. Clic.</em></p>
+                <p>—¡FUNCIONA! —gritaron los dos al mismo tiempo.</p>
+            `,
+            sabiasQue: `
+                <p><strong>Las celdas solares</strong> fueron inventadas en 1954 en los laboratorios Bell. ¡Pero la primera en el espacio fue en 1958, en el satélite Vanguard 1!</p>
+                <p><strong>Los auriculares</strong> funcionan al revés que los micrófonos: el micrófono convierte sonido en electricidad, y los auriculares convierten electricidad en sonido.</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Detector de luz casero</strong></p>
+                <p>Necesitás: una calculadora solar, auriculares viejos (que no uses).</p>
+                <p>Con ayuda de un adulto: pelá los cables de los auriculares y conectalos a donde van las baterías de la calculadora.</p>
+                <p>⚠️ ¡Hacelo siempre con supervisión adulta!</p>
+            `,
+            decisions: [
+                { text: "Materiales reciclados del terreno baldío", subtext: "\"Hay un montón de cosas tiradas acá: latas, botellas, cables viejos. ¡Podemos hacer un detector profesional sin gastar nada!\"", next: "05A" },
+                { text: "El kit de electrónica de {AMIGO}", subtext: "\"Mi papá me regaló un kit de electrónica que nunca abrí. ¡Es el momento de usarlo!\"", next: "05A" }
+            ],
+            quote: "\"El primer invento nunca es perfecto. Pero el primer invento siempre es el más importante.\" — Filosofía maker"
+        },
+        "03D": {
+            title: "Capítulo 3D: El Método Científico",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojOTM3MERCO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM2NjRlOTk7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDNEOiBFbCBNw6l0b2RvIENpZW50w61maWNvPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjYiPvCfjqggSWx1c3RyYWNpw7NuIHBlbmRpZW50ZTwvdGV4dD4KICA8cmVjdCB4PSI1MCIgeT0iMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KPC9zdmc+",
+            content: `
+                <p>—Esperá —dijo {NOMBRE}, sacando un lápiz y el cuaderno—. Antes de hacer cualquier cosa, tenemos que observar.</p>
+                <p>—¿Observar qué exactamente?</p>
+                <p>—Todo. ¿Cuántas veces parpadea la luz? ¿Cuánto dura cada parpadeo? ¿Hay pausas? ¿El color cambia? Si esto es un mensaje, tenemos que registrar todos los datos antes de interpretarlos.</p>
+                <p>Se sentaron en el pasto húmedo frente al molino. {NOMBRE} dividió una página del cuaderno en columnas y empezó a anotar:</p>
+                <blockquote>18:32 - 3 parpadeos - Verde brillante<br>
+                18:33 - 5 parpadeos - Verde<br>
+                18:35 - 7 parpadeos - Verde ¿más rápido?<br>
+                18:36 - 11 parpadeos - ¡Verde-azul! ¡Cambió!</blockquote>
+                <p>—¡Mirá esto! —exclamó {NOMBRE} después de diez minutos de observación—. 3, 5, 7, 11... ¡Son todos números primos!</p>
+                <p>Siguieron observando. A las 18:40, la luz cambió de color completamente: ahora era azul. Y los números cambiaron también: 1, 1, 2, 3, 5, 8...</p>
+                <p>—Eso es la secuencia de Fibonacci —dijo {AMIGO}—. Cada número es la suma de los dos anteriores.</p>
+                <p>{NOMBRE} sintió un escalofrío que no era por el frío.</p>
+                <p>—Quien esté haciendo esto conoce matemáticas. Y quiere que alguien lo note.</p>
+            `,
+            sabiasQue: `
+                <p><strong>El método científico</strong> tiene pasos que usan los científicos de todo el mundo: Observar, Preguntar, Hipotetizar, Experimentar, Analizar, Concluir. ¡{NOMBRE} y {AMIGO} están usando los primeros pasos sin saberlo!</p>
+                <p><strong>La secuencia de Fibonacci</strong> aparece en todas partes de la naturaleza: los pétalos de las flores, las espirales de los caracoles, las ramas de los árboles.</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Científico por un día</strong></p>
+                <p>Elegí algo que observar durante 10 minutos: pájaros, autos, nubes...</p>
+                <p>Hacé una tabla. Anotá: Hora, Qué ves, Cuántos, Algo raro o interesante.</p>
+                <p>¿Encontraste algún patrón?</p>
+            `,
+            decisions: [
+                { text: "Las luces tienen un patrón matemático: es un código", subtext: "\"Si descifro el código, voy a entender el mensaje. Necesito analizar más los datos.\"", next: "05A" },
+                { text: "Las luces vienen del viejo molino: hay que ir allá", subtext: "\"Los datos son interesantes, pero la respuesta real está en el molino. ¡Vamos a investigar!\"", next: "05A" }
+            ],
+            quote: "\"En la ciencia, los datos son el mapa. Pero igual tenés que caminar el territorio.\" — Consejo de exploradores"
+        },
+        "04A": {
+            title: "Capítulo 4A: Secretos del Abuelo",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojREFBNTIwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5ODczMTY7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDRBOiBTZWNyZXRvcyBkZWwgQWJ1ZWxvPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjYiPvCfjqggSWx1c3RyYWNpw7NuIHBlbmRpZW50ZTwvdGV4dD4KICA8cmVjdCB4PSI1MCIgeT0iMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KPC9zdmc+",
+            content: `
+                <p>El taller del abuelo de Martina estaba al final de la calle, en un galpón con techo de chapa que siempre olía a aceite de máquinas y aserrín.</p>
+                <p>—¿Don Ernesto? —llamó {NOMBRE} desde la puerta—. ¿Está?</p>
+                <p>El anciano apareció detrás de un torno viejo, limpiándose las manos con un trapo. Tenía el pelo blanco, anteojos gruesos, y una sonrisa que le arrugaba toda la cara.</p>
+                <p>—¡{NOMBRE}! ¡{AMIGO}! ¿Qué los trae por acá?</p>
+                <p>{NOMBRE} le mostró el cuaderno con el dibujo de la veleta.</p>
+                <p>—Una llave que abra el sótano de la casa abandonada de la esquina. Creemos que el dueño original era inventor, como usted.</p>
+                <p>Don Ernesto se quedó muy quieto. Sus ojos se humedecieron un poco detrás de los anteojos.</p>
+                <p>—Ese cuaderno era de mi hermano. De Alberto. Él fue quien construyó todo lo que hay en ese sótano.</p>
+                <p>Los dos amigos se miraron, asombrados.</p>
+                <p>Don Ernesto caminó hasta un estante polvoriento. Movió algunas cajas, sacó un reloj de cuco que no funcionaba, y de adentro extrajo una llave de bronce con forma de engranaje.</p>
+                <p>—La guardé todos estos años esperando que alguien con suficiente curiosidad la buscara. Creo que ustedes son esas personas.</p>
+            `,
+            sabiasQue: `
+                <p><strong>Muchos inventores</strong> fueron incomprendidos en su época. Nikola Tesla murió solo y pobre, a pesar de haber inventado la corriente alterna que usamos hoy.</p>
+                <p><strong>Las llaves con forma especial</strong> se llaman "llaves maestras" o "llaves de seguridad". Algunos inventores diseñaban llaves únicas para sus talleres.</p>
+            `,
+            actividad: null,
+            decisions: [
+                { text: "Ir al sótano con la llave", subtext: "Con la llave en mano, {NOMBRE} y {AMIGO} corrieron de vuelta a la casa abandonada...", next: "05A" }
+            ],
+            quote: "\"Los secretos de familia a veces son inventos esperando ser descubiertos.\" — Tradición de inventores"
+        },
+        "05A": {
+            title: "Capítulo 5A: El Laboratorio Secreto",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojREMxNDNDO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM5YTBlMmE7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+Q2FwIDVBOiBFbCBMYWJvcmF0b3JpbyBTZWNyZXRvPC90ZXh0PgogIDx0ZXh0IHg9IjQwMCIgeT0iMjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjYiPvCfjqggSWx1c3RyYWNpw7NuIHBlbmRpZW50ZTwvdGV4dD4KICA8cmVjdCB4PSI1MCIgeT0iMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMikiLz4KPC9zdmc+",
+            content: `
+                <p>{NOMBRE} bajó los escalones de metal con el corazón latiendo con fuerza. {AMIGO} lo seguía de cerca, alumbrando con la linterna del celular.</p>
+                <p>El sótano era más grande de lo que habían imaginado. Mucho más grande.</p>
+                <p>—Esto es... increíble —susurró {AMIGO}.</p>
+                <p>Era un laboratorio completo. Mesas de trabajo cubiertas de herramientas. Estantes llenos de frascos, cables, y componentes electrónicos. Pizarrones con fórmulas escritas en tiza. Y en el centro, la fuente del ruido:</p>
+                <p>Una máquina enorme, del tamaño de un auto, hecha de engranajes de cobre, tubos de vidrio, y cables que brillaban con una luz azulada. Giraba lentamente, produciendo el sonido metálico que habían escuchado desde afuera.</p>
+                <p><em>CLANG... CLANG... CLANG...</em></p>
+                <p>Había una placa de metal en la base de la máquina:</p>
+                <blockquote><strong>PROYECTO AURORA</strong><br>Generador de Energía Perpetua<br>Alberto Méndez - 1985</blockquote>
+                <p>—Energía perpetua —leyó {AMIGO}—. ¿Eso es posible?</p>
+                <p>{AMIGO} encontró otro cuaderno con la inscripción: <em>"Para quien tenga la curiosidad de continuar."</em></p>
+                <p>Adentro había una carta:</p>
+                <blockquote><em>Querido descubridor:</em><br><br>Si estás leyendo esto, significa que mi laboratorio encontró su nuevo dueño. El Proyecto Aurora funciona, pero está incompleto. Genera energía limpia e infinita, pero todavía no sé cómo compartirla con el mundo. Esa parte la dejo para quien venga después.<br><br>— Alberto</blockquote>
+            `,
+            sabiasQue: `
+                <p><strong>La "energía perpetua"</strong> es un sueño que los inventores persiguen desde hace siglos. La física moderna dice que es imposible, pero eso no detiene a los soñadores.</p>
+                <p><strong>Nikola Tesla</strong> trabajó en un sistema para transmitir electricidad sin cables a todo el mundo. Nunca lo terminó, pero hoy tenemos cargadores inalámbricos gracias a sus ideas.</p>
+            `,
+            actividad: `
+                <p><strong>Mini-experimento: Tu laboratorio secreto</strong></p>
+                <p>Si tuvieras un laboratorio secreto, ¿qué inventarías?</p>
+                <p>Escribí o dibujá: El nombre de tu invento, un problema que resuelve, los materiales que necesitarías.</p>
+            `,
+            decisions: [
+                { text: "Usarlo para crear inventos propios y ayudar al barrio", subtext: "\"Alberto dejó todo esto para que alguien continuara. ¡Podemos aprender, experimentar, y crear cosas nuevas!\"", next: "FINAL1" }
+            ],
+            quote: "\"Un laboratorio no es un lugar. Es un estado mental: el estado de querer entender.\" — Filosofía científica"
+        },
+        "FINAL1": {
+            title: "Final: Inventores del Barrio",
+            image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgNDUwIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMjI4QjIyO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNzYxMTc7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPHBhdHRlcm4gaWQ9ImRvdHMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTAiIHI9IjEuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+CiAgICA8L3BhdHRlcm4+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2JnKSIvPgogIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDUwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+CiAgPHRleHQgeD0iNDAwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCBzZXJpZiIgZm9udC1zaXplPSIzMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSI+RmluYWw6IEludmVudG9yZXMgZGVsIEJhcnJpbzwvdGV4dD4KICA8dGV4dCB4PSI0MDAiIHk9IjI2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC42Ij7wn46oIElsdXN0cmFjacOzbiBwZW5kaWVudGU8L3RleHQ+CiAgPHJlY3QgeD0iNTAiIHk9IjM4MCIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjIpIi8+Cjwvc3ZnPg==",
+            content: `
+                <h3>Seis meses después...</h3>
+                <p>El cartel sobre la puerta del sótano ahora decía:</p>
+                <blockquote><strong>🔧 CLUB DE INVENTORES DEL BARRIO 🔧</strong><br>Todos los sábados de 10 a 13<br>¡Traé tu curiosidad!</blockquote>
+                <p>{NOMBRE} ajustó el último tornillo de la lámpara solar que había construido para la plaza. A su lado, {AMIGO} terminaba de programar el sistema de riego automático para el jardín comunitario. Martina probaba un carrito eléctrico hecho con partes de bicicletas viejas.</p>
+                <p>—¡Funciona! —gritó Martina, dando una vuelta por el estacionamiento.</p>
+                <p>El laboratorio secreto de Alberto ya no era secreto. Se había convertido en el corazón del barrio: un lugar donde cualquier persona podía venir a aprender, crear, y resolver problemas.</p>
+                <p>Don Ernesto venía todos los sábados a enseñar a los más chicos cómo usar las herramientas. Decía que era lo que Alberto hubiera querido.</p>
+                <p>La puerta del laboratorio se abrió. Un grupo de chicos del barrio entró corriendo, cada uno con algún aparato roto en las manos.</p>
+                <p>—¡{NOMBRE}! ¡{AMIGO}! —gritaron—. ¿Nos ayudan a arreglar esto?</p>
+                <p>{NOMBRE} sonrió.</p>
+                <p>—Mejor todavía: les enseñamos a arreglarlo ustedes mismos.</p>
+            `,
+            sabiasQue: null,
+            actividad: null,
+            decisions: [],
+            quote: "\"El mejor momento para inventar es ahora. El mejor lugar es donde estés. La mejor herramienta es tu mente.\"",
+            isFinal: true,
+            achievements: [
+                { badge: "🔓", text: "Explorador/a: Encontraste el cuaderno y seguiste las pistas" },
+                { badge: "🔬", text: "Científico/a: Usaste el método científico para resolver misterios" },
+                { badge: "🔧", text: "Constructor/a: Creaste inventos con tus propias manos" },
+                { badge: "👑", text: "Líder: Formaste un equipo y ayudaste a la comunidad" },
+                { badge: "📚", text: "Maestro/a: Enseñaste a otros lo que aprendiste" }
+            ],
+            learnings: [
+                "La curiosidad es contagiosa. Cuando una persona hace preguntas, otros empiezan a hacer preguntas también.",
+                "Los mejores inventos resuelven problemas reales.",
+                "Inventar es mejor en equipo.",
+                "El conocimiento crece cuando se comparte."
+            ]
+        }
+    };
+
+    // ========================================
+    // APP STATE
+    // ========================================
+    let state = {
+        nombre: "",
+        amigo: "",
+        ciudad: "",
+        inventor: "",
+        currentChapter: "01",
+        history: []
+    };
+
+    // ========================================
+    // DOM ELEMENTS
+    // ========================================
+    const welcomeScreen = document.getElementById('welcome-screen');
+    const storyScreen = document.getElementById('story-screen');
+    const progressBar = document.getElementById('progress-bar');
+    const form = document.getElementById('personalization-form');
+    const menuModal = document.getElementById('menu-modal');
+
+    // ========================================
+    // FUNCTIONS
+    // ========================================
+    function replaceVariables(text) {
+        return text
+            .replace(/\{NOMBRE\}/g, state.nombre)
+            .replace(/\{AMIGO\}/g, state.amigo)
+            .replace(/\{CIUDAD\}/g, state.ciudad)
+            .replace(/\{INVENTOR_FAVORITO\}/g, state.inventor);
+    }
+
+    function saveState() {
+        localStorage.setItem('clubInventores', JSON.stringify(state));
+    }
+
+    function loadState() {
+        const saved = localStorage.getItem('clubInventores');
+        if (saved) {
+            state = JSON.parse(saved);
+            return true;
+        }
+        return false;
+    }
+
+    function calculateProgress() {
+        const totalChapters = Object.keys(chapters).length;
+        const visited = state.history.length;
+        return Math.min((visited / totalChapters) * 100, 100);
+    }
+
+    function renderChapter(chapterId) {
+        const chapter = chapters[chapterId];
+        if (!chapter) return;
+
+        state.currentChapter = chapterId;
+        if (!state.history.includes(chapterId)) {
+            state.history.push(chapterId);
+        }
+        saveState();
+
+        // Update progress bar
+        document.getElementById('progress-text').textContent = chapter.title.split(':')[0];
+        document.getElementById('progress-fill').style.width = calculateProgress() + '%';
+
+        // Image
+        const imgEl = document.getElementById('chapter-image');
+        imgEl.src = chapter.image;
+        imgEl.alt = chapter.title;
+
+        // Title
+        document.getElementById('chapter-title').textContent = chapter.title;
+
+        // Content
+        document.getElementById('chapter-content').innerHTML = replaceVariables(chapter.content);
+
+        // Extras (sabias que + actividad)
+        let extrasHTML = '';
+        if (chapter.sabiasQue) {
+            extrasHTML += `
+                <div class="info-box sabias-que">
+                    <h3>💭 ¿Sabías que...?</h3>
+                    ${replaceVariables(chapter.sabiasQue)}
+                </div>
+            `;
+        }
+        if (chapter.actividad) {
+            extrasHTML += `
+                <div class="info-box actividad">
+                    <h3>🔧 Actividad para el lector</h3>
+                    ${replaceVariables(chapter.actividad)}
+                </div>
+            `;
+        }
+        
+        // Final achievements
+        if (chapter.isFinal) {
+            extrasHTML += `
+                <div class="ending">
+                    <h2>🎖️ ¡Felicitaciones, ${state.nombre}!</h2>
+                    <p>Completaste "El Club de los Inventores"</p>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <h3 style="margin: 1.5rem 0 1rem;">Lo que ${state.nombre} aprendió:</h3>
+                <div class="info-box">
+                    ${chapter.learnings.map(l => `<p>✨ ${l}</p>`).join('')}
+                </div>
+                <h3 style="margin: 1.5rem 0 1rem;">🎖️ Logros desbloqueados:</h3>
+                <div class="achievements">
+                    ${chapter.achievements.map(a => `
+                        <div class="achievement">
+                            <span class="badge">${a.badge}</span>
+                            <span class="text">${a.text}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        document.getElementById('chapter-extras').innerHTML = extrasHTML;
+
+        // Decisions
+        const decisionsContainer = document.getElementById('decisions-container');
+        const decisionBox = document.getElementById('chapter-decisions');
+        
+        if (chapter.decisions && chapter.decisions.length > 0) {
+            decisionBox.classList.remove('hidden');
+            decisionsContainer.innerHTML = chapter.decisions.map(d => `
+                <button class="decision-btn" data-next="${d.next}">
+                    <span class="option">👉 ${replaceVariables(d.text)}</span>
+                    <span class="description">${replaceVariables(d.subtext)}</span>
+                </button>
+            `).join('');
+        } else {
+            decisionBox.classList.add('hidden');
+            if (chapter.isFinal) {
+                decisionsContainer.innerHTML = `
+                    <button class="btn btn-secondary" onclick="restartGame()">🔄 Jugar de nuevo con otras decisiones</button>
+                `;
+                decisionBox.classList.remove('hidden');
+            }
+        }
+
+        // Quote
+        document.getElementById('chapter-quote').textContent = chapter.quote || '';
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startStory() {
+        welcomeScreen.style.display = 'none';
+        storyScreen.style.display = 'block';
+        progressBar.classList.remove('hidden');
+        renderChapter(state.currentChapter);
+    }
+
+    function restartGame() {
+        state.currentChapter = "01";
+        state.history = [];
+        saveState();
+        renderChapter("01");
+    }
+
+    function newGame() {
+        localStorage.removeItem('clubInventores');
+        location.reload();
+    }
+
+    // ========================================
+    // EVENT LISTENERS
+    // ========================================
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        state.nombre = document.getElementById('input-nombre').value.trim();
+        state.amigo = document.getElementById('input-amigo').value.trim();
+        state.ciudad = document.getElementById('input-ciudad').value.trim();
+        state.inventor = document.getElementById('input-inventor').value;
+        state.currentChapter = "01";
+        state.history = [];
+        saveState();
+        startStory();
+    });
+
+    document.getElementById('decisions-container').addEventListener('click', (e) => {
+        const btn = e.target.closest('.decision-btn');
+        if (btn && btn.dataset.next) {
+            renderChapter(btn.dataset.next);
+        }
+    });
+
+    document.getElementById('menu-btn').addEventListener('click', () => {
+        menuModal.classList.add('active');
+    });
+
+    document.getElementById('continue-btn').addEventListener('click', () => {
+        menuModal.classList.remove('active');
+    });
+
+    document.getElementById('restart-chapter-btn').addEventListener('click', () => {
+        menuModal.classList.remove('active');
+        renderChapter(state.currentChapter);
+    });
+
+    document.getElementById('restart-all-btn').addEventListener('click', () => {
+        if (confirm('¿Estás seguro? Vas a perder todo el progreso.')) {
+            newGame();
+        }
+    });
+
+    menuModal.addEventListener('click', (e) => {
+        if (e.target === menuModal) {
+            menuModal.classList.remove('active');
+        }
+    });
+
+    // ========================================
+    // INIT
+    // ========================================
+    if (loadState() && state.nombre) {
+        // Resume saved game
+        document.getElementById('input-nombre').value = state.nombre;
+        document.getElementById('input-amigo').value = state.amigo;
+        document.getElementById('input-ciudad').value = state.ciudad;
+        document.getElementById('input-inventor').value = state.inventor;
+        
+        if (confirm(`¡Hola de nuevo, ${state.nombre}! ¿Querés continuar tu aventura?`)) {
+            startStory();
+        }
+    }
+    </script>
+</body>
+</html>
